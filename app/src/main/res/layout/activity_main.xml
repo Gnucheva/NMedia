@@ -7,9 +7,11 @@
     tools:context=".MainActivity">
 
     <TextView
-        android:layout_width="105dp"
-        android:layout_height="14dp"
-        android:text="Hello World!"
+        android:layout_width="215dp"
+        android:layout_height="97dp"
+        android:text="@string/nmedia"
+        android:textColor="@color/purple_200"
+        android:textSize="55sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.46"
         app:layout_constraintLeft_toLeftOf="parent"
