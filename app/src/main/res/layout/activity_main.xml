@@ -86,23 +86,23 @@
         app:constraint_referenced_ids="content" />
 
     <ImageView
-        android:id="@+id/favorite"
+        android:id="@+id/like"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/common_spacing"
         android:contentDescription="@string/Number_of_likes"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@id/barrier2"
-        app:srcCompat="@drawable/ic_baseline_favorite_border_24" />
+        app:srcCompat="@drawable/like" />
 
     <TextView
-        android:id="@+id/favoriteCount"
+        android:id="@+id/likeCount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/common_spacing"
         android:paddingHorizontal="@dimen/count_size"
         app:layout_constraintHorizontal_chainStyle="packed"
-        app:layout_constraintStart_toEndOf="@+id/favorite"
+        app:layout_constraintStart_toEndOf="@+id/like"
         app:layout_constraintTop_toTopOf="@id/barrier2"
         tools:text="@sample/posts.json/data/likes" />
 
@@ -110,11 +110,11 @@
         android:id="@+id/share"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="50dp"
         android:layout_marginTop="@dimen/common_spacing"
-        app:layout_constraintTop_toTopOf="@id/barrier2"
-        app:layout_constraintStart_toEndOf="@id/favoriteCount"
-        android:layout_marginStart="70dp"
         android:contentDescription="@string/Number_of_shares"
+        app:layout_constraintStart_toEndOf="@id/likeCount"
+        app:layout_constraintTop_toTopOf="@id/barrier2"
         app:srcCompat="@drawable/ic_baseline_share_24"
         tools:layout_editor_absoluteX="80dp" />
 
@@ -130,27 +130,27 @@
         tools:text="@sample/posts.json/data/reposts" />
 
     <ImageView
-        android:id="@+id/visibility"
+        android:id="@+id/views"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="60dp"
         android:layout_marginTop="16dp"
-        android:layout_marginStart="125dp"
         android:contentDescription="@string/Number_of_views"
         app:layout_constraintHorizontal_chainStyle="packed"
-        app:layout_constraintTop_toTopOf="@id/barrier2"
         app:layout_constraintStart_toEndOf="@id/shareCount"
-        app:srcCompat="@drawable/ic_baseline_visibility_24"
-         />
+        app:layout_constraintTop_toTopOf="@id/barrier2"
+        app:srcCompat="@drawable/ic_baseline_visibility_24" />
 
     <TextView
-        android:id="@+id/visibilityCount"
+        android:id="@+id/viewsCount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/common_spacing"
         android:paddingHorizontal="@dimen/count_size"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintHorizontal_chainStyle="packed"
-        app:layout_constraintStart_toEndOf="@+id/visibility"
+        app:layout_constraintStart_toEndOf="@+id/views"
         app:layout_constraintTop_toTopOf="@id/barrier2"
         tools:text="@sample/posts.json/data/views" />
 
