@@ -1,7 +1,6 @@
 package ru.netology.nmedia
 
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import ru.netology.nmedia.databinding.ActivityMainBinding
 import ru.netology.nmedia.dto.Post
@@ -33,14 +32,6 @@ class MainActivity : AppCompatActivity() {
             viewsCount.text = format(post.views)
             if (post.likedByMe) {
                 like?.setImageResource(R.drawable.liked)
-            }
-
-            root.setOnClickListener {
-                Log.d("stuff", "stuff")
-            }
-
-            avatar.setOnClickListener {
-                Log.d("stuff", "avatar")
             }
 
             like?.setOnClickListener {
