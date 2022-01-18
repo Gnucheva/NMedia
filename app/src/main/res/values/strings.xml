@@ -6,4 +6,10 @@
     <string name="Number_of_likes">Number of likes</string>
     <string name="Number_of_shares">Number of shares</string>
     <string name="Number_of_views">Number of views</string>
+    <string name="post_text">post_text</string>
+    <string name="save">Save</string>
+    <string name="edit">Edit</string>
+    <string name="remove">Remove</string>
+    <string name="Empty_error">Content can\'t be empty</string>
+    <string name="cancel">Cancel</string>
 </resources>

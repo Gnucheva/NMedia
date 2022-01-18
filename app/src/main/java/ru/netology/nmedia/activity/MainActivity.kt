@@ -1,9 +1,11 @@
 package ru.netology.nmedia.activity
 
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import ru.netology.nmedia.R
 import ru.netology.nmedia.adapter.PostsAdapter
 import ru.netology.nmedia.adapter.onInteractionListener
 import ru.netology.nmedia.databinding.ActivityMainBinding
@@ -31,8 +33,13 @@ class MainActivity : AppCompatActivity() {
             override fun onRemove(post: Post) {
                 viewModel.removeById(post.id)
             }
+
+            override fun onShare(post: Post) {
+                viewModel.shareById(post.id)
+            }
         })
         binding.list.adapter = adapter
+        // Подписываемся на обновление data во viewModel
         viewModel.data.observe(this, { posts ->
             adapter.submitList(posts)
         })
@@ -52,7 +59,7 @@ class MainActivity : AppCompatActivity() {
                 if (text.isNullOrBlank()) {
                     Toast.makeText(
                         this@MainActivity,
-                        "Content can't be empty",
+                        context.getString(R.string.Empty_error),
                         Toast.LENGTH_SHORT
                     ).show()
                     return@setOnClickListener
@@ -64,8 +71,23 @@ class MainActivity : AppCompatActivity() {
                 setText("")
                 clearFocus()
                 AndroidUtils.hideKeyboard(this)
+                binding.group.visibility = View.GONE
             }
         }
+        binding.cancel.setOnClickListener {
+            with(binding.content) {
+                setText("")
+                clearFocus()
+                AndroidUtils.hideKeyboard(this)
+                binding.group.visibility = View.GONE
+            }
+            return@setOnClickListener
+        }
+
+        binding.content.setOnClickListener {
+            binding.group.visibility = View.VISIBLE
+        }
+
     }
 }
 
