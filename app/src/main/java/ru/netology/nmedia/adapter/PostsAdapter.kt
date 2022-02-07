@@ -2,6 +2,7 @@ package ru.netology.nmedia.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.PopupMenu
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -9,15 +10,17 @@ import ru.netology.nmedia.R
 import ru.netology.nmedia.databinding.CardPostBinding
 import ru.netology.nmedia.dto.Post
 
-typealias OnLikeListener = (post: Post) -> Unit //ярлык для замещения naming  // = callback // пробрасывать данные обработки OnClick
-typealias OnShareListener = (post: Post) -> Unit
+interface onInteractionListener {
+    fun onLike(post: Post) {}
+    fun onEdit(post: Post) {}
+    fun onRemove(post: Post) {}
+    fun onShare(post: Post) {}
+}
 
 // класс, отвечающий за предоставление View
 
 class PostsAdapter(
-    private val onLikeListener: OnLikeListener,
-    private val onShareListener: OnShareListener
-
+    private val onInteractionListener: onInteractionListener,
 ) : ListAdapter<Post, PostViewHolder>(PostDiffCallback()) {
     //  ListAdapter — реализация RecyclerView.Adapter, которая работает в связке с DiffUtil
 
@@ -30,7 +33,7 @@ class PostsAdapter(
             parent,
             false
         ) // context - пространоство ресурсов
-        return PostViewHolder(binding, onLikeListener, onShareListener)
+        return PostViewHolder(binding, onInteractionListener)
 
     }
 
@@ -44,9 +47,7 @@ class PostsAdapter(
 
 class PostViewHolder(
     private val binding: CardPostBinding,
-    private val onLikeListener: OnLikeListener, // логика работы с кликами
-    private val onShareListener: OnShareListener
-
+    private val onInteractionListener: onInteractionListener,
 ) : RecyclerView.ViewHolder(binding.root) {
     fun bind(post: Post) {// переназначаются все поля
         binding.apply {// процесс подготовки View для отображения данных, соответствующих определённой позиции в адаптере
@@ -61,10 +62,28 @@ class PostViewHolder(
                 if (post.likedByMe) R.drawable.liked else R.drawable.like
             )
             like.setOnClickListener {
-                onLikeListener(post)
+                onInteractionListener.onLike(post)
             }
             share.setOnClickListener {
-                onShareListener(post)
+                onInteractionListener.onShare(post)
+            }
+            menu.setOnClickListener {
+                PopupMenu(it.context, it).apply {
+                    inflate(R.menu.options_post) // пункты меню
+                    setOnMenuItemClickListener { item ->
+                        when (item.itemId) {
+                            R.id.remove -> {
+                                onInteractionListener.onRemove(post)
+                                true
+                            }
+                            R.id.edit -> {
+                                onInteractionListener.onEdit(post)
+                                true
+                            }
+                            else -> false
+                        }
+                    }
+                }.show() // показ меню
             }
         }
     }

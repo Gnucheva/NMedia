@@ -7,4 +7,10 @@
     <string name="Number_of_likes">Количество лайков</string>
     <string name="Number_of_shares">"Количесвто поделившихся "</string>
     <string name="Number_of_views">Количество просмотров</string>
+    <string name="post_text">"Текст поста "</string>
+    <string name="save">Готово</string>
+    <string name="edit">Редактировать</string>
+    <string name="remove">Удалить</string>
+    <string name="Empty_error">Содержимое не может быть пустым!</string>
+    <string name="cancel">"Отменить "</string>
 </resources>
