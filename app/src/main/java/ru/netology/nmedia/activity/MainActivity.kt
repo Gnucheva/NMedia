@@ -1,5 +1,6 @@
 package ru.netology.nmedia.activity
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
@@ -35,8 +36,20 @@ class MainActivity : AppCompatActivity() {
             }
 
             override fun onShare(post: Post) {
-                viewModel.shareById(post.id)
+                val intent = Intent(Intent.ACTION_SEND)
+                    .setType("text/plain")
+                    .putExtra(Intent.EXTRA_TEXT, post.content)
+                    .let {
+                        Intent.createChooser(it, null)
+                    }
+                if (intent.resolveActivity(packageManager) != null) {
+                    startActivity(intent)
+
+                } else {
+                    showToast(R.string.app_not_found)
+                }
             }
+
         })
         binding.list.adapter = adapter
         // Подписываемся на обновление data во viewModel
@@ -90,4 +103,13 @@ class MainActivity : AppCompatActivity() {
 
     }
 }
+
+private fun MainActivity.showToast(text: Int, length: Int = Toast.LENGTH_SHORT) {
+    Toast.makeText(
+        this,
+        getString(text),
+        length
+    ).show()
+}
+
 
