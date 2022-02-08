@@ -2,8 +2,7 @@ package ru.netology.nmedia.activity
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.View
-import android.widget.Toast
+import androidx.activity.result.launch
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import ru.netology.nmedia.R
@@ -11,7 +10,7 @@ import ru.netology.nmedia.adapter.PostsAdapter
 import ru.netology.nmedia.adapter.onInteractionListener
 import ru.netology.nmedia.databinding.ActivityMainBinding
 import ru.netology.nmedia.dto.Post
-import ru.netology.nmedia.utils.AndroidUtils
+import ru.netology.nmedia.utils.AndroidUtils.showToast
 import ru.netology.nmedia.viewmodel.PostViewModel
 
 class MainActivity : AppCompatActivity() {
@@ -21,6 +20,13 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         val viewModel: PostViewModel by viewModels()
+
+        val newPostLauncher = registerForActivityResult(NewPostResultContract()) { result ->
+            result ?: return@registerForActivityResult
+            viewModel.changeContent(result)
+            viewModel.save()
+        }
+
         val adapter = PostsAdapter(object : onInteractionListener {
 
             override fun onEdit(post: Post) {
@@ -57,59 +63,12 @@ class MainActivity : AppCompatActivity() {
             adapter.submitList(posts)
         })
 
-        viewModel.edited.observe(this, { post ->
-            if (post.id == 0L) {
-                return@observe
-            }
-            with(binding.content) {
-                requestFocus()
-                setText(post.content)
-            }
-        })
-
-        binding.save.setOnClickListener {
-            with(binding.content) {
-                if (text.isNullOrBlank()) {
-                    Toast.makeText(
-                        this@MainActivity,
-                        context.getString(R.string.Empty_error),
-                        Toast.LENGTH_SHORT
-                    ).show()
-                    return@setOnClickListener
-                }
-
-                viewModel.changeContent(text.toString())
-                viewModel.save()
-
-                setText("")
-                clearFocus()
-                AndroidUtils.hideKeyboard(this)
-                binding.group.visibility = View.GONE
-            }
+        binding.add.setOnClickListener {
+            newPostLauncher.launch()
         }
-        binding.cancel.setOnClickListener {
-            with(binding.content) {
-                setText("")
-                clearFocus()
-                AndroidUtils.hideKeyboard(this)
-                binding.group.visibility = View.GONE
-            }
-            return@setOnClickListener
-        }
-
-        binding.content.setOnClickListener {
-            binding.group.visibility = View.VISIBLE
-        }
-
     }
 }
 
-private fun MainActivity.showToast(text: Int, length: Int = Toast.LENGTH_SHORT) {
-    Toast.makeText(
-        this,
-        getString(text),
-        length
-    ).show()
-}
+
 
 

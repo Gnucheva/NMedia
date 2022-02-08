@@ -14,4 +14,5 @@
     <string name="Empty_error">Содержимое не может быть пустым!</string>
     <string name="cancel">"Отменить "</string>
     <string name="app_not_found">"Приложений не найдено "</string>
+    <string name="description_post_save">"Сохранить пост "</string>
 </resources>

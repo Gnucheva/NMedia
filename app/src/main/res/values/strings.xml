@@ -13,4 +13,5 @@
     <string name="Empty_error">Content can\'t be empty</string>
     <string name="cancel">Cancel</string>
     <string name="app_not_found">App not found</string>
+    <string name="description_post_save">Post save</string>
 </resources>
