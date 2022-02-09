@@ -74,7 +74,7 @@ class PostViewHolder(
                                 onInteractionListener.onRemove(post)
                                 true
                             }
-                            R.id.edit -> {
+                            R.id.editFromOptionsMenu -> {
                                 onInteractionListener.onEdit(post)
                                 true
                             }
