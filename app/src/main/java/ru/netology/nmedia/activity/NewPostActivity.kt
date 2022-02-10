@@ -24,6 +24,11 @@ class NewPostActivity : AppCompatActivity() {
             }
             finish()
         }
+        binding.cancel.setOnClickListener{
+            val intent = Intent()
+            setResult(Activity.RESULT_CANCELED, intent)
+            finish()
+        }
 
     }
 }
