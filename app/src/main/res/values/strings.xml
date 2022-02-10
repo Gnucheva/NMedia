@@ -14,4 +14,7 @@
     <string name="cancel">Cancel</string>
     <string name="app_not_found">App not found</string>
     <string name="description_post_save">Post save</string>
+    <string name="play_button">play button</string>
+    <string name="video_name">video name</string>
+    <string name="video_preview">video preview</string>
 </resources>

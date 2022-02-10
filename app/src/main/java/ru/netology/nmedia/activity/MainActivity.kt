@@ -1,6 +1,7 @@
 package ru.netology.nmedia.activity
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import androidx.activity.result.launch
 import androidx.activity.viewModels
@@ -64,6 +65,14 @@ class MainActivity : AppCompatActivity() {
                 } else {
                     showToast(R.string.app_not_found)
                 }
+            }
+
+            override fun onVideo(post: Post) {
+                val intent = Intent().apply {
+                    action = Intent.ACTION_VIEW
+                    data = Uri.parse(post.video)
+                }
+                startActivity(intent)
             }
 
         })

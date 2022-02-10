@@ -12,10 +12,13 @@ class PostRepositoryInMemoryImpl : PostRepository {
             author = "Нетология. Университет интернет-профессий",
             content = "Привет, это новая Нетология! Когда-то Нетология начиналась с интенсивов по онлайн-маркетингу. Затем появились курсы по дизайну, разработке, аналитике и управлению. Мы растём сами и помогаем расти студентам: от новичков до уверенных профессионалов. Но самое важное остаётся с нами: мы верим ,что в каждом уже есть сила , которая заставляет хотеть больше ,целиться выше , бежать быстрее. Наша миссия-помочь встать на пути роста и начать цепочку перемен > http://netolo.gy/fyb ",
             published = "21 мая в 18:36",
+            video = "https://www.youtube.com/watch?v=WhWc3b3KhnY",
+            videoName = "Офлайн-интенсив.Медиадизайн",
             likes = 100,
             share = 90,
             views = 1_000_000,
             likedByMe = false
+
         ), // create mock data
         Post(
             id = nextId++,
@@ -28,10 +31,13 @@ class PostRepositoryInMemoryImpl : PostRepository {
                     "\n" +
                     "Приступить можно в любое удобное время → https://netolo.gy/hxn ",
             published = "18 сентября в 10:12",
+            video = "https://www.youtube.com/watch?v=WhWc3b3KhnY",
+            videoName = "Нетология. Учим новому Вас",
             likes = 99,
             share = 100,
             views = 100_000,
             likedByMe = false
+
 
         ),
         Post(
@@ -41,10 +47,13 @@ class PostRepositoryInMemoryImpl : PostRepository {
                     "\n" +
                     "Разобраться в разуме NPC из Skyrim поможет наша статья → https://netolo.gy/hxp",
             published = "19 сентября в 10:12",
+            video = "https://www.youtube.com/watch?v=WhWc3b3KhnY",
+            videoName = "От бумажных афиш до VR",
             likes = 300,
             share = 3000,
             views = 300,
             likedByMe = false
+
 
         ),
         Post(
@@ -54,10 +63,13 @@ class PostRepositoryInMemoryImpl : PostRepository {
                     "\n" +
                     "А как вырастить руководителя рассказываем в статье → https://netolo.gy/hxo",
             published = "19 сентября в 10:12",
+            video = "https://www.youtube.com/watch?v=WhWc3b3KhnY",
+            videoName = "Бесплатный курс «Как стать дизайнером» ",
             likes = 400,
             share = 4000,
             views = 400,
             likedByMe = false
+
 
         ),
     ).reversed()

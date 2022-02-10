@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="Widget.AppTheme.LikeCheckBox" parent="Widget.MaterialComponents.Button.TextButton">
+    <style name="GreyColor" parent="Widget.MaterialComponents.Button.TextButton">
         <item name="iconTint">@color/greyColor</item>
     </style>
     <style name="TextStyle" parent="TextAppearance.MaterialComponents.Body1">
