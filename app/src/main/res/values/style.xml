@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+
     <style name="GreyColor" parent="Widget.MaterialComponents.Button.TextButton">
-        <item name="iconTint">@color/greyColor</item>
+
+       <item name="iconTint">@color/greyColor</item>
     </style>
     <style name="TextStyle" parent="TextAppearance.MaterialComponents.Body1">
         <item name="android:textColor">@color/greyColor</item>
