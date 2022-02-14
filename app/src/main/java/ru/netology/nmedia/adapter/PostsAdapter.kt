@@ -15,6 +15,7 @@ interface onInteractionListener {
     fun onEdit(post: Post) {}
     fun onRemove(post: Post) {}
     fun onShare(post: Post) {}
+    fun onVideo(post: Post) {}
 }
 
 // класс, отвечающий за предоставление View
@@ -58,6 +59,7 @@ class PostViewHolder(
             like.text = format(post.likes)
             share.text = format(post.share)
             views.text = format(post.views)
+            videoName.text = post.videoName
             like.isChecked = post.likedByMe
             like.setOnClickListener {
                 onInteractionListener.onLike(post)
@@ -74,7 +76,7 @@ class PostViewHolder(
                                 onInteractionListener.onRemove(post)
                                 true
                             }
-                            R.id.edit -> {
+                            R.id.editFromOptionsMenu -> {
                                 onInteractionListener.onEdit(post)
                                 true
                             }
@@ -82,6 +84,12 @@ class PostViewHolder(
                         }
                     }
                 }.show() // показ меню
+            }
+            playButton.setOnClickListener {
+                onInteractionListener.onVideo(post)
+            }
+            videoImage.setOnClickListener {
+                onInteractionListener.onVideo(post)
             }
         }
     }
