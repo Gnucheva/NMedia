@@ -72,7 +72,11 @@ class MainActivity : AppCompatActivity() {
                     action = Intent.ACTION_VIEW
                     data = Uri.parse(post.video)
                 }
-                startActivity(intent)
+                if (intent.resolveActivity(packageManager) != null) { //проверят установлено ли приложение Youtube
+                    startActivity(intent)
+                } else {
+                    showToast(R.string.app_not_found)
+                }
             }
 
         })
