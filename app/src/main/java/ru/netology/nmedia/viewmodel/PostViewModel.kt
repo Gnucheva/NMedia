@@ -21,11 +21,13 @@ class PostViewModel(application: Application) :
     private val repository: PostRepository = PostRepositoryFileImpl(application)
     val data = repository.getAll()
     val edited = MutableLiveData(empty)
+    val currentPost= MutableLiveData(empty)
 
     fun save() {
         edited.value?.let {
             repository.save(it)
         }
+        currentPost.value = edited.value
         edited.value = empty
     }
 
@@ -43,6 +45,12 @@ class PostViewModel(application: Application) :
         }
     }
 
+    fun selectPost(post:Post){
+        currentPost.value = post
+    }
+
     fun likeById(id: Long) = repository.likeById(id)
     fun removeById(id: Long) = repository.removeById(id)
+    fun shareById(id: Long) = repository.shareById(id)
+    fun findById(id: Long) = repository.findById(id)
 }
