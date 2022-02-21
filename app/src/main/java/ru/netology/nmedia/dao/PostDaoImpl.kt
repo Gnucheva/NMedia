@@ -16,9 +16,8 @@ class PostDaoImpl(private val db: SQLiteDatabase) : PostDao {
             ${PostColumns.COLUMN_LIKED_BY_ME} BOOLEAN NOT NULL DEFAULT 0,
             ${PostColumns.COLUMN_LIKES} INTEGER NOT NULL DEFAULT 0,
             ${PostColumns.COLUMN_SHARE} INTEGER NOT NULL DEFAULT 0,
-            ${PostColumns.COLUMN_VIEWS} INTEGER NOT NULL DEFAULT 0,
-            ${PostColumns.COLUMN_VIDEO} TEXT NOT NULL
-        );
+            ${PostColumns.COLUMN_VIEWS} INTEGER NOT NULL DEFAULT 0
+           );
         """.trimIndent()
     }
 
@@ -33,7 +32,6 @@ class PostDaoImpl(private val db: SQLiteDatabase) : PostDao {
         const val COLUMN_LIKES = "likes"
         const val COLUMN_SHARE = "share"
         const val COLUMN_VIEWS = "views"
-        const val COLUMN_VIDEO = "video"
         val ALL_COLUMNS = arrayOf(
             COLUMN_ID,
             COLUMN_AUTHOR,
@@ -42,8 +40,7 @@ class PostDaoImpl(private val db: SQLiteDatabase) : PostDao {
             COLUMN_LIKED_BY_ME,
             COLUMN_LIKES,
             COLUMN_SHARE,
-            COLUMN_VIEWS,
-            COLUMN_VIDEO
+            COLUMN_VIEWS
         )
     }
 
@@ -139,7 +136,6 @@ class PostDaoImpl(private val db: SQLiteDatabase) : PostDao {
                 likes = getLong(getColumnIndexOrThrow(PostColumns.COLUMN_LIKES)),
                 share = getLong(getColumnIndexOrThrow(PostColumns.COLUMN_SHARE)),
                 views = getLong(getColumnIndexOrThrow(PostColumns.COLUMN_VIEWS)),
-                video = getString(getColumnIndexOrThrow(PostColumns.COLUMN_VIDEO))
             )
             // Курсор не предоставляет функций для извлечения значения по имени колонки (т.е. если вы их поменяете местами, то будет либо Exception, либо данные попадут не в те поля), поэтому приходится по имени искать индекс
         }
