@@ -12,8 +12,9 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import ru.netology.nmedia.R
 import ru.netology.nmedia.adapter.format
-import ru.netology.nmedia.databinding.FragmentCardPostBinding
+import ru.netology.nmedia.databinding.FragmentScrollingBinding
 import ru.netology.nmedia.dto.Post
+import ru.netology.nmedia.utils.AndroidUtils.showToast
 import ru.netology.nmedia.utils.StringArg
 import ru.netology.nmedia.viewmodel.PostViewModel
 
@@ -27,17 +28,19 @@ class UnitPostFragment : Fragment() {
         var Bundle.textArg: String? by StringArg
     }
 
+    val Fragment.packageManager get() = activity?.packageManager
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val binding = FragmentCardPostBinding.inflate(inflater, container, false)
+        val binding = FragmentScrollingBinding.inflate(inflater, container, false)
 
         val post = viewModel.currentPost.value ?: Post()
-        viewModel.currentPost.observe(viewLifecycleOwner, {
+        viewModel.currentPost.observe(viewLifecycleOwner) {
 
-            binding.apply {
+            binding.unitPostFragment.apply {
                 avatar.setImageResource(R.drawable.ic_launcher_foreground)
                 author.text = post.author
                 published.text = post.published
@@ -48,12 +51,11 @@ class UnitPostFragment : Fragment() {
                 videoName.text = post.videoName
                 like.isChecked = post.likedByMe
             }
-        })
+        }
 
-        with(binding) {
+        with(binding.unitPostFragment) {
             like.setOnClickListener {
                 viewModel.likeById(post.id)
-                sync(post.id)
             }
 
             share.setOnClickListener {
@@ -72,14 +74,25 @@ class UnitPostFragment : Fragment() {
                     action = Intent.ACTION_VIEW
                     data = Uri.parse(post.video)
                 }
-                startActivity(intent)
+
+                if (intent.resolveActivity(packageManager!!) != null) {
+                    startActivity(intent)
+
+                } else {
+                    showToast(R.string.app_not_found)
+                }
             }
             videoImage.setOnClickListener {
                 val intent = Intent().apply {
                     action = Intent.ACTION_VIEW
                     data = Uri.parse(post.video)
                 }
-                startActivity(intent)
+                if (intent.resolveActivity(packageManager!!) != null) {
+                    startActivity(intent)
+
+                } else {
+                    showToast(R.string.app_not_found)
+                }
             }
             menu.setOnClickListener {
                 PopupMenu(it.context, it).apply {
@@ -87,6 +100,7 @@ class UnitPostFragment : Fragment() {
                     setOnMenuItemClickListener { item ->
                         when (item.itemId) {
                             R.id.remove -> {
+                                viewModel.currentPost.value = Post()
                                 viewModel.removeById(post.id)
                                 findNavController().navigateUp()
                                 true
@@ -105,10 +119,6 @@ class UnitPostFragment : Fragment() {
             }
         }
         return binding.root
-    }
-
-    private fun sync(id: Long) {
-        viewModel.currentPost.value = viewModel.findById(id)
     }
 }
 

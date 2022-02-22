@@ -6,24 +6,24 @@ import androidx.lifecycle.MutableLiveData
 import ru.netology.nmedia.db.AppDb
 import ru.netology.nmedia.dto.Post
 import ru.netology.nmedia.repository.PostRepository
-import ru.netology.nmedia.repository.PostRepositorySQLiteImpl
+import ru.netology.nmedia.repository.PostRepositoryImpl
 
 private val empty = Post(
     id = 0,
     content = "",
     author = "",
     likedByMe = false,
-    likes=0,
-    share =0,
-    views=0,
+    likes = 0,
+    share = 0,
+    views = 0,
     published = ""
-    )
+)
 
 class PostViewModel(application: Application) :
     AndroidViewModel(application) { // реализация хранения state(состояние данных)
     // упрощенный вариант
     private val repository: PostRepository =
-        PostRepositorySQLiteImpl(AppDb.getInstance(application).postDao)
+        PostRepositoryImpl(AppDb.getInstance(context = application).postDao())
     val data = repository.getAll()
     val edited = MutableLiveData(empty)
     val currentPost = MutableLiveData(empty)
@@ -32,7 +32,6 @@ class PostViewModel(application: Application) :
         edited.value?.let {
             repository.save(it)
         }
-        currentPost.value = edited.value
         edited.value = empty
     }
 
@@ -50,12 +49,7 @@ class PostViewModel(application: Application) :
         }
     }
 
-    fun selectPost(post: Post) {
-        currentPost.value = post
-    }
-
     fun likeById(id: Long) = repository.likeById(id)
     fun removeById(id: Long) = repository.removeById(id)
     fun shareById(id: Long) = repository.shareById(id)
-    fun findById(id: Long) = repository.findById(id)
 }

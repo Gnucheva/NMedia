@@ -1,6 +1,5 @@
 package ru.netology.nmedia.activity
 
-import android.app.Activity
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -31,7 +30,6 @@ class FeedFragment : Fragment() {
     }
 
     val Fragment.packageManager get() = activity?.packageManager
-    var activity: Activity? = getActivity()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -54,6 +52,7 @@ class FeedFragment : Fragment() {
             }
 
             override fun onRemove(post: Post) {
+                viewModel.currentPost.value = Post()
                 viewModel.removeById(post.id)
             }
 
@@ -84,7 +83,7 @@ class FeedFragment : Fragment() {
             }
 
             override fun viewPost(post: Post) {
-                viewModel.selectPost(post)
+                viewModel.currentPost.value = post
                 findNavController().navigate(R.id.action_feedFragment_to_unitPostFragment)
             }
         })
