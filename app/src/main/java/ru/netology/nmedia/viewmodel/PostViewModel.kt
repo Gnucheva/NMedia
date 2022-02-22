@@ -21,7 +21,7 @@ class PostViewModel(application: Application) :
     private val repository: PostRepository = PostRepositoryFileImpl(application)
     val data = repository.getAll()
     val edited = MutableLiveData(empty)
-    val currentPost= MutableLiveData(empty)
+    val currentPost = MutableLiveData(empty)
 
     fun save() {
         edited.value?.let {
@@ -45,7 +45,7 @@ class PostViewModel(application: Application) :
         }
     }
 
-    fun selectPost(post:Post){
+    fun selectPost(post: Post) {
         currentPost.value = post
     }
 
