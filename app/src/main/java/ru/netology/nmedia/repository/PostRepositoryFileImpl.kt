@@ -32,7 +32,6 @@ class PostRepositoryFileImpl(
         }
     }
 
-    // для презентации убрали пустые строки
     override fun getAll(): LiveData<List<Post>> = data
 
     override fun save(post: Post) {
@@ -80,6 +79,10 @@ class PostRepositoryFileImpl(
         posts = posts.filter { it.id != id }
         data.value = posts
         sync()
+    }
+
+    override fun findById(id: Long): Post? {
+        return posts.find { it.id == id }
     }
 
     private fun sync() {

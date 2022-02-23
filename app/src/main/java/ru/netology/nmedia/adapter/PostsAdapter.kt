@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import ru.netology.nmedia.R
-import ru.netology.nmedia.databinding.CardPostBinding
+import ru.netology.nmedia.databinding.FragmentCardPostBinding
 import ru.netology.nmedia.dto.Post
 
 interface onInteractionListener {
@@ -16,6 +16,7 @@ interface onInteractionListener {
     fun onRemove(post: Post) {}
     fun onShare(post: Post) {}
     fun onVideo(post: Post) {}
+    fun viewPost(post: Post) {}
 }
 
 // класс, отвечающий за предоставление View
@@ -29,7 +30,7 @@ class PostsAdapter(
         parent: ViewGroup,
         viewType: Int
     ): PostViewHolder { // создание ViewHolder
-        val binding = CardPostBinding.inflate(
+        val binding = FragmentCardPostBinding.inflate(
             LayoutInflater.from(parent.context),
             parent,
             false
@@ -47,7 +48,7 @@ class PostsAdapter(
 // класс содержажий информацию о визуальном отображении конкретного элемента списка (котейнер для View)
 
 class PostViewHolder(
-    private val binding: CardPostBinding,
+    private val binding: FragmentCardPostBinding,
     private val onInteractionListener: onInteractionListener,
 ) : RecyclerView.ViewHolder(binding.root) {
     fun bind(post: Post) {// переназначаются все поля
@@ -90,6 +91,9 @@ class PostViewHolder(
             }
             videoImage.setOnClickListener {
                 onInteractionListener.onVideo(post)
+            }
+            content.setOnClickListener {
+                onInteractionListener.viewPost(post)
             }
         }
     }
