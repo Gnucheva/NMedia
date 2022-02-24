@@ -17,4 +17,5 @@
     <string name="play_button">play button</string>
     <string name="video_name">video name</string>
     <string name="video_preview">video preview</string>
+    <string name="chooser_share_post">chooser share post</string>
 </resources>

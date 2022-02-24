@@ -18,4 +18,5 @@
     <string name="play_button">"Начать проигрывание "</string>
     <string name="video_name">Название видео</string>
     <string name="video_preview">"Режим предпросмотра "</string>
+    <string name="chooser_share_post">Поделиться выбранной публикацией</string>
 </resources>

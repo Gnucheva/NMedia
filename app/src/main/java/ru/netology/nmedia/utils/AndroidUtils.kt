@@ -4,7 +4,7 @@ import android.content.Context
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
-import ru.netology.nmedia.activity.MainActivity
+import androidx.fragment.app.Fragment
 
 object AndroidUtils {
     fun hideKeyboard(view: View) {
@@ -12,11 +12,16 @@ object AndroidUtils {
         imm.hideSoftInputFromWindow(view.windowToken, 0)
     }
 
-    fun MainActivity.showToast(text: Int, length: Int = Toast.LENGTH_SHORT) {
+    fun Fragment.showToast(text: Int, length: Int = Toast.LENGTH_SHORT) {
         Toast.makeText(
-            this,
+            activity,
             getString(text),
             length
         ).show()
     }
 }
+
+
+
+
+
