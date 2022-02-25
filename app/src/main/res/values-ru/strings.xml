@@ -19,4 +19,7 @@
     <string name="video_name">Название видео</string>
     <string name="video_preview">"Режим предпросмотра "</string>
     <string name="chooser_share_post">Поделиться выбранной публикацией</string>
+    <string name="channel_remote_name">Уведомление сервера</string>
+    <string name="channel_remote_description">"Уведомление с удаленного сервера "</string>
+    <string name="notification_user_liked">%1$s поставил лайк посту %2$s</string>
 </resources>
