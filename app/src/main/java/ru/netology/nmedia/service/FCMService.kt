@@ -39,6 +39,13 @@ class FCMService : FirebaseMessagingService() {
         message.data[action]?.let {
             when (Action.valueOf(it)) {
                 Action.LIKE -> handleLike(gson.fromJson(message.data[content], Like::class.java))
+                Action.SHARE -> handleShare(gson.fromJson(message.data[content], Share::class.java))
+                Action.NEW_POST -> handleNewPost(
+                    gson.fromJson(
+                        message.data[content],
+                        NewPost::class.java
+                    )
+                )
             }
         }
     }
@@ -51,7 +58,8 @@ class FCMService : FirebaseMessagingService() {
         val notification = NotificationCompat.Builder(this, channelId)
             .setSmallIcon(R.drawable.ic_notifications)
             .setContentTitle(
-                getString( //строки
+                getString(
+                    //строки
                     R.string.notification_user_liked,
                     content.userName,
                     content.postAuthor,
@@ -63,10 +71,47 @@ class FCMService : FirebaseMessagingService() {
         NotificationManagerCompat.from(this)
             .notify(Random.nextInt(100_000), notification)
     }
+
+    private fun handleShare(content: Share) { //отправка Notification
+        val notification = NotificationCompat.Builder(this, channelId)
+            .setSmallIcon(R.drawable.ic_notifications)
+            .setContentTitle(
+                getString(
+                    //строки
+                    R.string.notification_user_share,
+                    content.userName,
+                    content.postAuthor,
+                )
+            )
+            .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+            .build()
+
+        NotificationManagerCompat.from(this)
+            .notify(Random.nextInt(100_000), notification)
+    }
+
+    private fun handleNewPost(content: NewPost) { //отправка Notification
+        val notification = NotificationCompat.Builder(this, channelId)
+            .setSmallIcon(R.drawable.ic_notifications)
+            .setContentTitle(
+                getString(
+                    R.string.notification_user_new_post,
+                    content.userName
+                )
+            )
+            .setStyle(NotificationCompat.BigTextStyle().bigText(content.post))
+            .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+            .build()
+
+        NotificationManagerCompat.from(this)
+            .notify(Random.nextInt(100_000), notification)
+    }
 }
 
 enum class Action {
     LIKE,
+    SHARE,
+    NEW_POST,
 }
 
 data class Like(
@@ -74,4 +119,18 @@ data class Like(
     val userName: String,
     val postId: Long,
     val postAuthor: String,
+)
+
+data class Share(
+    val userId: Long,
+    val userName: String,
+    val postId: Long,
+    val postAuthor: String,
+)
+
+data class NewPost(
+    val userId: Long,
+    val userName: String,
+    val postId: Long,
+    val post: String,
 )
