@@ -21,6 +21,7 @@
 * [Navigation Component](https://developer.android.com/guide/navigation) для обработки всех навигаций, а также передачи данных между пунктами назначения.
 * [Data Binding](https://developer.android.com/topic/libraries/data-binding/) для привязки компонентов пользовательского интерфейса в layouts к источникам данных.
 * [Room](https://developer.android.com/topic/libraries/architecture/room) библиотека, которая обеспечивает уровень абстракции над SQLite, чтобы обеспечить более надежный доступ к базе данных, используя всю мощь SQLite.
+* [Firebase](https://firebase.google.com/) сервис, предназначенный для отправки Cloud Messaging (что позволяет организовавать Push-уведомления) различным устройствам.
 
 ### Установка :
 Требуется минимальный уровень API 23. Clone repository and run. 
